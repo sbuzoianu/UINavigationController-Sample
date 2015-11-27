@@ -19,18 +19,32 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"Primul cadru";
+    self.litereGrecesti=@[@"Alpha",@"Beta", @"Gamma", @"Delta", @"Epsilon", @"Zeta", @"Eta", @"Theta", @"Iota", @"Kappa", @"Lambda", @"Mu", @"Nu", @"Xi", @"Omicron", @"Pi", @"Rho", @"Sigma", @"Tau", @"Upsilon", @"Phi", @"Chi", @"Psi", @"Omega"];
+    
 
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return self.litereGrecesti.count;
 }
 
 - (IBAction)butonApasat:(id)sender {
     [self performSegueWithIdentifier:@"Segue1" sender:self];
     NSLog(@"s-a introdus: %@", self.dataText.text);
 }
+
+- (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *simpleString =@"SimpleString";
+    UITableViewCell * cell=[tableView dequeueReusableCellWithIdentifier:simpleString];
+    if (cell==nil) {
+        cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleString];
+    }
+    cell.textLabel.text=self.litereGrecesti[indexPath.row];
+    return cell;
+}
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
